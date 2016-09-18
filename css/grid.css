@@ -1,0 +1,105 @@
+/* This will add some content to the grid and display it in block */
+.grid:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+
+/* Box model compatile with browsers */
+*, *.after, *.before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Custom class for our columns */
+[class^='col-'] {
+	float: left;
+	padding: 0;
+	text-align: center;
+}
+
+/* Crates 10 columns and we are using 2 of those columns */
+.col-2of8 {
+	width: 25%;
+}
+
+.col-1of5 {
+	width: 20%;
+}
+
+/* Creates one column */
+.col-1of1 {
+	width: 100%;
+}
+
+/* Creates 4 columns */
+.col-1of4 {
+	width: 25%;
+}
+
+/* Creates 4 columns */
+.col-1of5 {
+	width: 20%;
+}
+
+
+/* Creates two columns */
+.col-1of2 {
+	width: 50%;
+}
+
+/* Creates three columns */
+.col-1of3 {
+	width: 33.3%;
+}
+
+.col-1of3-home {
+	width: 33.3%;
+}
+
+.col-2of3 {
+	width: 66.6%;
+}
+
+.col-2of2 {
+	width: 50%;
+}
+
+.col-4of5 {
+	width: 80%;
+}
+
+.col-4of5-news {
+	width: 80%;
+}
+
+.col-1of5-news {
+	width: 20%;
+}
+
+@media (max-width: 800px){
+    .col-1of3 {
+		width: 100%;
+	}
+
+	.col-1of4 {
+		width: 50%;
+	}
+}
+
+
+@media (max-width: 700px){
+    .col-1of2 {
+		width: 100%;
+	}
+}
+
+@media (max-width: 600px){
+    .col-1of4 {
+		width: 100%;
+	}
+	.col-4of5-news {
+		width: 100%;
+	}
+}
