@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keyword" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title> X KAKEXIA </title>
+        <link rel="shortcut icon" href="">
+
+        <link rel="stylesheet" href="css/normalize.css"> 
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/grid.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <section id="doctor">
+            <canvas id="weight" style="display:none"></canvas>
+            <div class="grid">
+                <div class="col-1of4">
+                    <img src="img/amanda.png" alt="Image of a person">
+                </div>
+                <div class="col-1of2">
+                    <h3> Meyer, A. </h3>
+                    <p> Address: 1234 University Dr. Burnaby, BC V5A 1S6 <br> Phone: (888) 123.4567 <br> Email: ameyer@lumohack.com</p>
+                </div>
+                <div class="col-1of4">
+                    <button id="questionaire-btn" class="btn see-patient">Send Check Up</button>
+                    <button class="btn see-patient">View Profile</button>
+                </div>
+            </div>
+            <p class="see-patient warning-message">2016/09/18: Amanda Meyer has lost more than 10kg in a month.</p>
+            <div id="history-doc"></div>
+
+            <hr>
+
+        </section>
+
+        <script src="lib/jquery-2.2.3.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="lib/gauge.min.js"></script>
+        <script src='js/script.js'></script>
+        <script src='js/doc-vis.js'></script>
+    </body>
+</html>

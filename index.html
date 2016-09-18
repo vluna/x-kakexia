@@ -28,17 +28,44 @@
         <section id="home">
             <canvas id="weight"></canvas>
             <h1>Current Weight</h1>
-            <h1 class="current-weight"></h1>
+            <h2 class="current-weight"></h2>
         </section>
 
         <section id="history">
-            <h1>History</h1>
-            <h1>Kg</h1>
+            <h1>Average Weight</h1>
+            <h2 class="average-weight"></h2>
         </section>
 
         <section id="questionaire">
-            <h1>Questionaire</h1>
-            <h1>Kg</h1>
+            <h1>Check Up</h1>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value=""> I have felt dizzy 
+                </label>
+                <label>
+                    <input type="checkbox"> I have excersise more than 30 min a day
+                </label>
+                <label>
+                    <input type="checkbox"> I have been eating well
+                </label>
+                <label>
+                    <input type="checkbox"> I have been feeling tired
+                </label>
+                <label>
+                    <input type="checkbox"> I have been coughing
+                </label>
+                <label>
+                    <input type="checkbox"> My body is in pain
+                </label>
+                <label>
+                    <input type="checkbox"> I have been having a fever
+                </label>
+                <label>
+                    <input type="checkbox"> My skin changed colour 
+                </label>
+                <button id="submit-questionaire" class="btn">Send Check Up</button>
+            </div>
+            <p class="no-questionairs">No check ups at the moment</p>
         </section>
 
         <section id="chat">
@@ -48,28 +75,28 @@
 
         <footer>
             <div class="grid">
-                <div id="menu-home" class="col-1of4 nav-menu nav-menu-selected">
+                <div id="menu-home" class="col-1of3 nav-menu nav-menu-selected">
                     <img src="img/home-icon.png" alt="White home icon">
                     <p>Home</p>
                 </div>
-                <div id="menu-history" class="col-1of4 nav-menu">
+                <div id="menu-history" class="col-1of3 nav-menu">
                     <img src="img/calendar-icon.png" alt="White calendar icon">
                     <p>History</p>
                 </div>
-                <div id="menu-questionaire" class="col-1of4 nav-menu">
+                <div id="menu-questionaire" class="col-1of3 nav-menu">
                     <img src="img/questionaire-icon.png" alt="White questionaire icon">
-                    <p>Questionaire</p>
+                    <p>Check Up</p>
                 </div>
-                <div id="menu-chat" class="col-1of4 nav-menu">
+<!--                 <div id="menu-chat" class="col-1of4 nav-menu">
                     <img src="img/chat-icon.png" alt="White chat icon">
                     <p>Chat</p>
-                </div>
+                </div> -->
             </div>
         </footer>
 
         <script src="lib/jquery-2.2.3.min.js"></script>
         <script src="lib/bootstrap.min.js"></script>
-        <script src="lib/d3.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="lib/gauge.min.js"></script>
         <script src='js/script.js'></script>
     </body>

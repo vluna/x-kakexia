@@ -1,4 +1,90 @@
+/*
+ * HISTORY SECTION
+ * Draws the graph in history screen according to the value in the
+ * json file
+ */
+var margin = {top: 60, right: 20, bottom: 70, left: 40},
+    width = window.innerWidth - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom,
+    mean;
+
+// Parse the date / time
+var parseDate = d3.time.format("%Y-%m").parse;
+
+var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+var y = d3.scale.linear().range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickFormat(d3.time.format("%Y-%m"));
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+
+var svg = d3.select("#history").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("data-history.csv", function(error, data) {
+
+    data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.value = +d.value;
+    });
+  
+  x.domain(data.map(function(d) { return d.date; }));
+  y.domain([0, (d3.max(data, function(d) { return d.value; }))+20]);
+  
+  mean = d3.mean(data,function(d) { return + d.value });
+
+  $('.average-weight').html(mean.toFixed(2) +'(Kg)');
+
+  console.log("MEAN: " +mean);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", "-.55em")
+      .attr("transform", "rotate(-90)" );
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Kg");
+
+  svg.selectAll("bar")
+      .data(data)
+    .enter().append("rect")
+      .style("fill", "#00a368")
+      .attr("x", function(d) { return x(d.date); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+});
+
+/*
+ * HOME SECTION
+ * Draws the graph in home screen according to the value in the
+ * json file
+ */
 var total_weight;
+var questionaire_sent;
 
 var opts = {
     lines: 12, // The number of lines to draw
@@ -10,8 +96,8 @@ var opts = {
         color: '#000000' // Fill color
     },
     limitMax: 'true',   // If true, the pointer will not go past the end of the gauge
-    colorStart: '#6FADCF',   // Colors
-    colorStop: '#8FC0DA',    // just experiment with them
+    colorStart: '#00a368',   // Colors
+    colorStop: '#00a368',    // just experiment with them
     strokeColor: '#E0E0E0',   // to see which ones work best for you
     generateGradient: true
 };
@@ -33,92 +119,34 @@ setInterval(function() {
             gauge.set(total_weight); // set actual value
             $('.current-weight').html(total_weight+ '(Kg)');
         }
+        console.log(total_weight);
+        if((73) == mean) {
+            $('.see-patient').css('display', 'inline-block');
+        }
+
+        $('#questionaire-btn').click(function() {
+            localStorage.setItem("sent", "true");
+        })
     });
 }, 500);
 
+questionaire_sent = localStorage.getItem("sent");
 
+if(questionaire_sent == "true") {
+    $('.checkbox').css("display", "inline-block");
+    $('.no-questionairs').css("display", 'none');
+}
 
-// // set the dimensions of the canvas
-// var margin = {top: 20, right: 20, bottom: 70, left: 40},
-//     width = 600 - margin.left - margin.right,
-//     height = 300 - margin.top - margin.bottom;
-
-
-// // set the ranges
-// var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-// var y = d3.scale.linear().range([height, 0]);
-
-// // define the axis
-// var xAxis = d3.svg.axis()
-//     .scale(x)
-//     .orient("bottom")
-
-
-// var yAxis = d3.svg.axis()
-//     .scale(y)
-//     .orient("left")
-//     .ticks(10);
-
-
-// // add the SVG element
-// var svg = d3.select("body").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//   .append("g")
-//     .attr("transform", 
-//           "translate(" + margin.left + "," + margin.top + ")");
-
-
-// // load the data
-// d3.json("data.json", function(error, data) {
-
-//     data.forEach(function(d) {
-//         d.Letter = d.Letter;
-//         d.Freq = +d.Freq;
-//     });
-  
-//   // scale the range of the data
-//   x.domain(data.map(function(d) { return d.Letter; }));
-//   y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
-
-//   // add axis
-//   svg.append("g")
-//       .attr("class", "x axis")
-//       .attr("transform", "translate(0," + height + ")")
-//       .call(xAxis)
-//     .selectAll("text")
-//       .style("text-anchor", "end")
-//       .attr("dx", "-.8em")
-//       .attr("dy", "-.55em")
-//       .attr("transform", "rotate(-90)" );
-
-//   svg.append("g")
-//       .attr("class", "y axis")
-//       .call(yAxis)
-//     .append("text")
-//       .attr("transform", "rotate(-90)")
-//       .attr("y", 5)
-//       .attr("dy", ".71em")
-//       .style("text-anchor", "end")
-//       .text("Frequency");
-
-
-//   // Add bar chart
-//   svg.selectAll("bar")
-//       .data(data)
-//     .enter().append("rect")
-//       .attr("class", "bar")
-//       .attr("x", function(d) { return x(d.Letter); })
-//       .attr("width", x.rangeBand())
-//       .attr("y", function(d) { return y(d.Freq); })
-//       .attr("height", function(d) { return height - y(d.Freq); });
-
-// });
-
-
-
-
+$('#submit-questionaire').click(function() {
+    localStorage.removeItem("sent");
+    $('.checkbox').css("display", "none");
+    $('.no-questionairs').css("display", 'block');
+})
+/*
+ * MENU NAVIGATION
+ * Select the nav and changes through the sections and adds class to 
+ * current menu and removes the rest.
+*/
 $('#menu-questionaire').click(function(){
     $('#chat').css("display", "none");
     $('#menu-chat').removeClass("nav-menu-selected");
